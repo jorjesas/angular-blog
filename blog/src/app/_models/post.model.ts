@@ -6,8 +6,8 @@ export class Post {
     body?: string;
 
     constructor(obj?: any) {
-        this.id              = obj && obj.id              || uuid();
-        this.title          = obj && obj.title          || false;
-        this.body          = obj && obj.body          || new Date();
+        //this.id              = obj && obj.id              || '';
+        this.title          = obj && obj.title          || '';
+        this.body          = obj && obj.body          || '';
       }
 }
