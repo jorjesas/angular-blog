@@ -17,7 +17,8 @@ const appRoutes = [
   { path: 'home', component: HomeComponent},
   { path: 'blog', component: BlogComponent},
   { path: 'blog/:id', component: BlogDetailComponent},
-  { path: 'blog-add', component: PostFormComponent}
+  { path: 'blog-add', component: PostFormComponent},
+  { path: 'blog/:id/edit', component: PostFormComponent}
 ];
 
 @NgModule({

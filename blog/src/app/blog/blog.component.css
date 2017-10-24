@@ -1,0 +1,44 @@
+.blog-title {
+    margin-bottom: 50px;
+}
+
+.load-more {
+    background-color: #919ed8;
+    display: inline-block;
+    text-align: center;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+.load-more.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/*
+    Original version: http://www.bootply.com/128062
+    
+    This version adds support for IE 10+ and Firefox.
+*/
+
+.fa-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -ms-animation: spin .7s infinite linear;
+    -webkit-animation: spinw .7s infinite linear;
+    -moz-animation: spinm .7s infinite linear;
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+  
+@-webkit-keyframes spinw {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@-moz-keyframes spinm {
+    from { -moz-transform: rotate(0deg);}
+    to { -moz-transform: rotate(360deg);}
+}
