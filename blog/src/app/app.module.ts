@@ -5,12 +5,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpModule } from '@angular/http';
 
 import { PostService } from './_services/post.service';
+import { UserService } from './_services/user.service';
 
 import { AppComponent } from './app.component';
 import { BlogComponent } from './blog/blog.component';
 import { HomeComponent } from './home/home.component';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { PostFormComponent } from './post-form/post-form.component';
+import { LoginComponent } from './user/login/login.component';
 
 const appRoutes = [
   { path: '', component: HomeComponent},
@@ -18,7 +20,8 @@ const appRoutes = [
   { path: 'blog', component: BlogComponent},
   { path: 'blog/:id', component: BlogDetailComponent},
   { path: 'blog-add', component: PostFormComponent},
-  { path: 'blog/:id/edit', component: PostFormComponent}
+  { path: 'blog/:id/edit', component: PostFormComponent},
+  { path: 'user/login', component: LoginComponent}
 ];
 
 @NgModule({
@@ -27,7 +30,8 @@ const appRoutes = [
     BlogComponent,
     HomeComponent,
     BlogDetailComponent,
-    PostFormComponent
+    PostFormComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,7 @@ const appRoutes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [PostService],
+  providers: [PostService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
