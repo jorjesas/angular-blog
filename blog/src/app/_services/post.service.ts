@@ -2,18 +2,23 @@ import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Request, RequestMethod, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Post } from '../_models/post.model';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class PostService {
 
-    constructor(private http: Http) {}
+    serverUrl = 'http://localhost:3000/api';
 
-    // headers = new Headers({
-    //     'Content-Type': 'application/json'
-    // });
+    constructor(private http: Http,
+                private authService: AuthService) {}
+
+    headers = new Headers({
+        'Content-Type': 'application/json',
+        'Authorization': this.authService.getToken()
+    });
 
     getPosts(filter: string): Observable<Post[]> {
-        let url = 'http://localhost:3000/api/posts';
+        let url = this.serverUrl + '/posts';
 
         const header = new Headers();
         header.append('Content-Type', 'application/json');
@@ -30,7 +35,7 @@ export class PostService {
     }
 
     getPost(id: string): Observable<Post> {
-        const url = 'http://localhost:3000/api/posts/' + id;
+        const url =  this.serverUrl + '/posts/' + id;
 
                 const header = new Headers();
                 header.append('Content-Type', 'application/json');
@@ -44,7 +49,7 @@ export class PostService {
     }
 
     createPost(post: Post): Observable<any> {
-        const url = 'http://localhost:3000/api/posts/';
+        const url = this.serverUrl +  '/posts/';
 
                         const header = new Headers();
                         header.append('Accept', 'application/json');
@@ -58,7 +63,7 @@ export class PostService {
     }
 
     updatePost(post: Post): Observable<any> {
-        const url = 'http://localhost:3000/api/posts/' + post.id;
+        const url = this.serverUrl + '/posts/' + post.id;
 
                         const header = new Headers();
                         header.append('Accept', 'application/json');

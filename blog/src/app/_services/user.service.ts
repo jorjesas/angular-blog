@@ -3,23 +3,25 @@ import { Http, Headers } from '@angular/http';
 import { User } from '../_models/user.model';
 import { isNullOrUndefined } from 'util';
 import {Observable, Subject} from 'rxjs/Rx';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class UserService {
 
-    headers  = new Headers({
+    headers = new Headers({
         'Content-Type': 'application/json',
-        'Authorization': ''
+        'Authorization': this.authService.getToken()
     });
 
-    serverUrl = 'http://0.0.0.0:3000/api';
+    serverUrl = 'http://localhost:3000/api';
 
-    constructor(private http: Http) {
+    constructor(private http: Http,
+        private authService: AuthService) {
 
     }
 
     getUserById(id: string): Observable<User> {
-        const url = this.serverUrl + '/accounts/' + id;
+        const url = this.serverUrl + '/users/' + id;
         return this.http.get(url, {headers: this.headers}).map(res => res.json()).catch(err => {
           return Observable.throw(err);
         });
@@ -27,7 +29,7 @@ export class UserService {
 
     login(username: string, password: string): Observable<any> {
 
-        const url = this.serverUrl + '/accounts/login?include=user';
+        const url = this.serverUrl + '/Users/login?include=user';
         return this.http.post(url, {username: username, password: password}, {headers: this.headers}).map(res => res.json()).catch(err => {
             return Observable.throw(err);
         });
@@ -43,12 +45,18 @@ export class UserService {
 
     logout(): Observable<any> {
 
-        const url = this.serverUrl + '/accounts/logout';
-        //const data = {accessTokenID: this.authService.getToken()};
-        const data = null;
+        const url = this.serverUrl + '/user/logout';
+        const data = {accessTokenID: this.authService.getToken()};
         return this.http.post(url, data, {headers: this.headers}).map(res => res.json()).catch(err => {
             return Observable.throw(err);
         });
+
+        // const url = this.serverUrl + '/accounts/logout';
+        // //const data = {accessTokenID: this.authService.getToken()};
+        // const data = null;
+        // return this.http.post(url, data, {headers: this.headers}).map(res => res.json()).catch(err => {
+        //     return Observable.throw(err);
+        // });
     }
 }
 
