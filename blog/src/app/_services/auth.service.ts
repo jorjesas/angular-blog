@@ -10,7 +10,7 @@ export class AuthService {
 
 
   public onAuthChange$: Subject<User>;
-  constructor(private userService: UserService) {
+  constructor() {
 
 
     this.onAuthChange$ = new Subject();
@@ -32,8 +32,7 @@ export class AuthService {
   getCurrentUser(): User {
 
     const userString = localStorage.getItem('currentUser');
-    console.log(userString);
-    if (!isNullOrUndefined(userString)) {
+    if (userString !== null && userString !== 'undefined') {
         console.log(userString);
       const user: User = JSON.parse(userString);
 
@@ -59,7 +58,7 @@ export class AuthService {
     //this.onAuthChange$.next(null);
     // we need also request logout to the server api
 
-    this.userService.logout();
+    //this.userService.logout();
 
     localStorage.removeItem('currentUser');
     localStorage.removeItem('accessToken');
