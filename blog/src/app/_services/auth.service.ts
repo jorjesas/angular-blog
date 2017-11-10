@@ -20,8 +20,6 @@ export class AuthService {
 
   setUser(user: User) {
 
-
-
     this.onAuthChange$.next(user);
 
     const userString = JSON.stringify(user);

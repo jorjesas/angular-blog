@@ -30,7 +30,7 @@
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a  *ngIf="!this.isLoggedIn" class="dropdown-item" routerLink="/user/login">Log In</a>
-        <a  *ngIf="this.isLoggedIn" class="dropdown-item" (click)="logout()">Log Out</a>
+        <a  *ngIf="this.isLoggedIn" class="dropdown-item" (click)="logout()">Log Out {{this.user.firstname + " " + this.user.lastname}}</a>
         <a  *ngIf="!this.isLoggedIn" class="dropdown-item" routerLink="/register">Register</a>
         <a *ngIf="this.isLoggedIn" class="dropdown-item" routerLink="/blog-add">Create blog post</a>
       </div>

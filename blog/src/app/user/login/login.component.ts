@@ -11,6 +11,7 @@ import { AuthService } from '../../_services/auth.service';
 })
 export class LoginComponent implements OnInit {
   user: User = new User();
+  message = {type: 'success', 'msg': ''};
 
   constructor(private userService: UserService,
               private authService: AuthService,
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
     const user = this.user;
     this.userService.login(user.username, user.password).subscribe(res => {
       console.log(res);
+      this.message.type = 'success';
 
       const userLoggedIn = res.user;
       this.authService.setUser(userLoggedIn);
@@ -35,6 +37,8 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/user/my-account']);
     }, err => {
       console.log(err);
+      this.message.type = 'error';
+      this.message.msg = 'Invalid credentials';
     });
 
   }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { isNullOrUndefined } from './_helpers/util';
 import { User } from './_models/user.model';
+
+import { UserService } from './_services/user.service';
 import { AuthService } from './_services/auth.service';
 
 @Component({
@@ -14,8 +16,10 @@ export class AppComponent {
   user: User = new User();
   isLoggedIn = false;
 
-  constructor(private authService: AuthService) {
+  constructor(private userService: UserService,
+              private authService: AuthService) {
     this.user = this.authService.getCurrentUser();
+    console.log(this.user.firstName);
 
     if (!isNullOrUndefined(this.user) && this.user.id) {
       this.isLoggedIn = true;
@@ -25,6 +29,8 @@ export class AppComponent {
   logout() {
 
     this.isLoggedIn = false;
+
+    this.userService.logout();
     this.authService.logout();
   }
 }
