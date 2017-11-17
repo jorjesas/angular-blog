@@ -21,7 +21,7 @@ export class UserService {
     }
 
     getUserById(id: string): Observable<User> {
-        const url = this.serverUrl + '/users/' + id;
+        const url = this.serverUrl + '/accounts/' + id;
         return this.http.get(url, {headers: this.headers}).map(res => res.json()).catch(err => {
           return Observable.throw(err);
         });
@@ -29,7 +29,7 @@ export class UserService {
 
     login(username: string, password: string): Observable<any> {
 
-        const url = this.serverUrl + '/Users/login?include=user';
+        const url = this.serverUrl + '/accounts/login?include=user';
         return this.http.post(url, {username: username, password: password}, {headers: this.headers}).map(res => res.json()).catch(err => {
             return Observable.throw(err);
         });
@@ -45,7 +45,7 @@ export class UserService {
 
     logout(): Observable<any> {
 
-        const url = this.serverUrl + '/user/logout';
+        const url = this.serverUrl + '/accounts/logout';
         const data = {accessTokenID: this.authService.getToken()};
         return this.http.post(url, data, {headers: this.headers}).map(res => res.json()).catch(err => {
             return Observable.throw(err);
@@ -60,4 +60,4 @@ export class UserService {
     }
 }
 
-export const userServiceInjectables: Array<any> = [UserService];
+// export const userServiceInjectables: Array<any> = [UserService];

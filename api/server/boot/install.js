@@ -3,13 +3,13 @@
 var installed = true;
 module.exports = function (app) {
     if (!installed) {
-        var User = app.models.User;
+        var User = app.models.account;
         var Role = app.models.Role;
         var RoleMapping = app.models.RoleMapping;
     
         User.create([
-            {username: 'jorje', email: 'jorje12@gmail.com', password: 'admin'},
-            {username: 'dea', email: 'jorje12@gmail.com', password: 'user'}
+            {username: 'jorje', email: 'jorje12@gmail.com', password: 'admin', 'firstName': 'Jorje', 'lastName': 'S'},
+            {username: 'dea', email: 'jorje12@gmail.com', password: 'user', 'firstName': 'Dea', 'lastName': 'M'}
         ], function(err, users) {
             if (err) throw err;
     
@@ -20,7 +20,7 @@ module.exports = function (app) {
             }, function(err, role) {
                 if (err) throw err;
     
-            //make bob an admin
+            //make jorje an admin
             role.principals.create({
                 principalType: RoleMapping.USER,
                 principalId: users[0].id

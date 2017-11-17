@@ -5,3 +5,9 @@ export function isNullOrUndefined(obj) {
         return true;
     }
 }
+
+export function isNullOrEmpty(obj) {
+    if (obj === null || obj === '') {
+        return true;
+    }
+}

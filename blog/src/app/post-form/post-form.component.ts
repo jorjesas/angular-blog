@@ -13,6 +13,7 @@ export class PostFormComponent implements OnInit {
 
   message = {type: 'success', 'msg': 'Post successfully created.'};
   loading = false;
+  defaultBodyValue = '';
 
   constructor(
     private postService: PostService,
@@ -22,44 +23,54 @@ export class PostFormComponent implements OnInit {
 
   ngOnInit() {
 
-    this.route.params.switchMap((params: Params) => {
-      const id = params['id'];
-      return this.postService.getPost(id);
-    }).subscribe(res => {
-      this.loading = false;
-      this.post = res as Post;
-      console.log(this.post);
-    }, err => {
-      console.log(err);
-    });
+    if (this.route.snapshot.params['id']) {
+      this.route.params.switchMap((params: Params) => {
+        const id = params['id'];
+        if (typeof params['id'] !== 'undefined' && params['id'] !== null) {
+          this.loading = true;
+          return this.postService.getPost(id);
+        }
+      }).subscribe(res => {
+        this.loading = false;
+        this.post = res as Post;
+        this.defaultBodyValue = this.post.body;
+        console.log(this.post);
+      }, err => {
+        console.log(err);
+      });
+    }
   }
 
   onSubmit() {
-    console.log(this.post);
+      console.log(this.post);
 
-    if (this.post.id) {
-      this.postService.updatePost(this.post).subscribe(res => {
-        console.log(res.id);
+      if (this.post.id) {
+        this.postService.updatePost(this.post).subscribe(res => {
+          console.log(res.id);
 
-        this.router.navigate(['/blog', res.id]);
+          this.router.navigate(['/blog', res.id]);
 
-      }, err => {
-        console.log(err);
-        this.message.type = 'error';
-        this.message.msg = 'Error saving blog post';
-      });
-    } else {
-      this.postService.createPost(this.post).subscribe(res => {
-        console.log(res.id);
+        }, err => {
+          console.log(err);
+          this.message.type = 'error';
+          this.message.msg = 'Error saving blog post';
+        });
+      } else {
+        this.postService.createPost(this.post).subscribe(res => {
+          console.log(res.id);
 
-        this.router.navigate(['/blog', res.id]);
+          this.router.navigate(['/blog', res.id]);
 
-      }, err => {
-        console.log(err);
-        this.message.type = 'error';
-        this.message.msg = 'Error saving blog post';
-      });
-    }
+        }, err => {
+          console.log(err);
+          this.message.type = 'error';
+          this.message.msg = 'Error saving blog post';
+        });
+      }
+  }
+
+  onBodyTextEditorKeyUp(textValue) {
+      this.post.body = textValue;
   }
 
 }

@@ -1,5 +1,5 @@
 {
-  "name": "post",
+  "name": "comment",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -11,11 +11,20 @@
       "required": true
     },
     "body": {
-      "type": "string"
+      "type": "string",
+      "required": true
+    },
+    "date": {
+      "type": "date"
     }
   },
   "validations": [],
   "relations": {
+    "post": {
+      "type": "belongsTo",
+      "model": "post",
+      "foreignKey": ""
+    },
     "account": {
       "type": "belongsTo",
       "model": "account",
@@ -24,21 +33,21 @@
   },
   "acls": [
     {
-      "accessType": "*",
+      "accessType": "READ",
       "principalType": "ROLE",
-      "principalId": "admin",
+      "principalId": "$everyone",
       "permission": "ALLOW"
     },
     {
-      "accessType": "*",
+      "accessType": "WRITE",
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "DENY"
     },
     {
-      "accessType": "READ",
+      "accessType": "WRITE",
       "principalType": "ROLE",
-      "principalId": "$everyone",
+      "principalId": "$owner",
       "permission": "ALLOW"
     }
   ],
