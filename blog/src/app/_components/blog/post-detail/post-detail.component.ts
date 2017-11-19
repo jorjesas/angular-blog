@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Post } from '../_models/post.model';
-import { PostService } from '../_services/post.service';
+
+import { Post } from '../../../_models/post.model';
+import { PostService } from '../../../_services/post.service';
 
 @Component({
-  selector: 'app-blog-detail',
-  templateUrl: './blog-detail.component.html',
-  styleUrls: ['./blog-detail.component.css']
+  selector: 'app-post-detail',
+  templateUrl: './post-detail.component.html',
+  styleUrls: ['./post-detail.component.css']
 })
-export class BlogDetailComponent implements OnInit {
+export class PostDetailComponent implements OnInit {
   post: Post = new Post();
 
   constructor(

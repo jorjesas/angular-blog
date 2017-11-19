@@ -9,24 +9,27 @@ import { UserService } from './_services/user.service';
 import { AuthService } from './_services/auth.service';
 
 import { AppComponent } from './app.component';
-import { BlogComponent } from './blog/blog.component';
-import { HomeComponent } from './home/home.component';
-import { BlogDetailComponent } from './blog-detail/blog-detail.component';
-import { PostFormComponent } from './post-form/post-form.component';
-import { LoginComponent } from './user/login/login.component';
-import { ProfileComponent } from './user/profile/profile.component';
-import { RegisterComponent } from './user/register/register.component';
+import { BlogComponent } from './_components/blog/blog-main/blog.component';
+import { HomeComponent } from './_components/home/home.component';
+import { PostDetailComponent } from './_components/blog/post-detail/post-detail.component';
+import { PostFormComponent } from './_components/blog/post-form/post-form.component';
+import { LoginComponent } from './_components/user/login/login.component';
+import { ProfileComponent } from './_components/user/profile/profile.component';
+import { RegisterComponent } from './_components/user/register/register.component';
+import { CategorySectionComponent } from './_components/blog/category-section/category-section.component';
+import { CommentFormComponent } from './_components/blog/comment-form/comment-form.component';
 
 const appRoutes = [
   { path: '', component: HomeComponent},
   { path: 'home', component: HomeComponent},
   { path: 'blog', component: BlogComponent},
-  { path: 'blog/:id', component: BlogDetailComponent},
+  { path: 'blog/:id', component: PostDetailComponent},
   { path: 'blog-add', component: PostFormComponent},
   { path: 'blog/:id/edit', component: PostFormComponent},
   { path: 'user/login', component: LoginComponent},
   { path: 'user/register', component: RegisterComponent},
-  { path: 'user/my-account', component: ProfileComponent}
+  { path: 'user/my-account', component: ProfileComponent},
+  { path: 'category/:id', component: CategorySectionComponent}
 ];
 
 @NgModule({
@@ -34,11 +37,13 @@ const appRoutes = [
     AppComponent,
     BlogComponent,
     HomeComponent,
-    BlogDetailComponent,
+    PostDetailComponent,
     PostFormComponent,
     LoginComponent,
     ProfileComponent,
-    RegisterComponent
+    RegisterComponent,
+    CategorySectionComponent,
+    CommentFormComponent
   ],
   imports: [
     BrowserModule,

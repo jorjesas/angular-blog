@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {Subject} from 'rxjs';
+
 import { isNullOrUndefined } from './_helpers/util';
 import { User } from './_models/user.model';
-
 import { UserService } from './_services/user.service';
 import { AuthService } from './_services/auth.service';
 
@@ -17,6 +18,7 @@ export class AppComponent implements OnInit {
 
   user: User = new User();
   isLoggedIn = false;
+  private searchTerm = new Subject<string>();
 
   constructor(private userService: UserService,
               private authService: AuthService,
@@ -40,12 +42,18 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
-
     this.isLoggedIn = false;
-
     this.userService.logout();
     this.authService.logout();
 
     this.router.navigate(['/home']);
+  }
+
+  onKeyup(searchText: string){
+
+    if(searchText !== ''){
+      this.searchTerm.next(searchText);
+    }
+    
   }
 }
