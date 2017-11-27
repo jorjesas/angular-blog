@@ -1,13 +1,25 @@
 .blog-title {
-    margin-bottom: 50px;
+    margin-bottom: 20px;
+}
+
+.blog-options {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.blog-search-form {
+    text-align: center;
 }
 
 .load-more {
-    background-color: #919ed8;
+    background-color: transparent;
     display: inline-block;
     text-align: center;
     padding: 8px 15px;
     cursor: pointer;
+    color: deepskyblue;
+    border: 2px solid deepskyblue;
 }
 
 .load-more.disabled {

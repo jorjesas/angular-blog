@@ -1,3 +1,14 @@
 .middle-container {
     text-align: center;
 }
+
+.button-account-dropdown {
+    background-color: transparent;
+    color: deepskyblue;
+    border: 0px;
+    cursor: pointer;
+}
+
+.button-account-dropdown:focus {
+    /* border: 0px; */
+}

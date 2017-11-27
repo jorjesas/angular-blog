@@ -1,9 +1,8 @@
 <article class="post-detail">
   <h2>{{post.title}}</h2>
-  <div class="post-content">{{post.body}}</div>
 
   <div class="dropdown">
-      <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button class="post-edit-dropdown dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Admin post
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -11,19 +10,24 @@
         <a class="dropdown-item" routerLink="/blog/{{post.id}}/delete-post">Delete post</a>
       </div>
   </div>
+  <hr>
 
+  <div class="post-content">{{post.body}}</div>
+  <hr>
+
+  <div>
+      <h4>Write your comment:</h4>
+      <app-comment-form class="comment-form" (newComment)="onNewComment($event)" [postId]="postId"></app-comment-form>
+  </div>
+
+  <hr>
   <div id="comments">
-      <h2>Comments:</h2>
+      <h4>Comments:</h4>
       <ul>
         <li *ngFor="let comment of comments">
           <h3>{{comment.name}} says: {{comment.title}}</h3>
           <div class="comment-body">{{comment.body}}</div>
         </li>
       </ul>
-  </div>
-    
-  <div class="comment-form">
-    <h2>Write your comment:</h2>
-    <app-comment-form (newComment)="onNewComment($event)" [postId]="postId"></app-comment-form>
   </div>
 </article>

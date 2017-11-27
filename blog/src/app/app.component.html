@@ -1,11 +1,45 @@
-<!-- <nav>
-  <ul>
-    <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
-    <li><a routerLink="/blog" >Blog</a></li>
-  </ul>
-</nav> -->
+<header class="page-header">
+  <div class="page-main-header">
+    <div class="header-title">
+      <h1>Blog</h1>
+    </div>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- <div class="header-main-image">
+      <img src="img/header_image_3.jpg">
+    </div> -->
+  </div>
+
+
+  <div class="header-menubar">
+      <ul>
+          <li>
+            <a routerLink="/home" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li>
+            <a routerLink="/blog">Blog</a>
+          </li>
+          <li class="header-account-dropdown dropdown">
+              <button class="button-account-dropdown dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  My account
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a  *ngIf="this.isLoggedIn" class="dropdown-item" routerLink="/user/my-account">My profile ({{user.firstName}})</a>
+                  <a  *ngIf="!this.isLoggedIn" class="dropdown-item" routerLink="/user/login">Log In</a>
+                  <a  *ngIf="this.isLoggedIn" class="dropdown-item" (click)="logout()">Log Out</a>
+                  <a  *ngIf="!this.isLoggedIn" class="dropdown-item" routerLink="/user/register">Register</a>
+                  <a *ngIf="this.isLoggedIn" class="dropdown-item" routerLink="/blog-add">Create blog post</a>
+                </div>
+          </li>
+      </ul>
+      <hr>
+  </div>
+
+  <!-- <div class="header-separator">
+    <img src="img/custom_menu_divider_2.png" width="50%">
+  </div> -->
+</header>
+
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -19,9 +53,6 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/blog">Blog</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
     </ul>
 
     <div class="dropdown">
@@ -29,19 +60,15 @@
         My account
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a  *ngIf="this.isLoggedIn" class="dropdown-item" routerLink="/user/my-account">My profile ({{user.firstName}})</a>
         <a  *ngIf="!this.isLoggedIn" class="dropdown-item" routerLink="/user/login">Log In</a>
-        <a  *ngIf="this.isLoggedIn" class="dropdown-item" (click)="logout()">Log Out - {{user.firstName}}</a>
+        <a  *ngIf="this.isLoggedIn" class="dropdown-item" (click)="logout()">Log Out</a>
         <a  *ngIf="!this.isLoggedIn" class="dropdown-item" routerLink="/user/register">Register</a>
         <a *ngIf="this.isLoggedIn" class="dropdown-item" routerLink="/blog-add">Create blog post</a>
       </div>
     </div>
-
-    <form class="form-inline my-2 my-lg-0">
-      <input #searchTextBox (keyup)="onKeyup(searchTextBox.value)" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
   </div>
-</nav>
+</nav> -->
 
 <div class="container middle-container">
   <router-outlet></router-outlet>

@@ -1,0 +1,160 @@
+body{
+	display: flex;
+	flex-direction: column;
+	font-family:'Short Stack',Arial, Georgia,Trebuchet MS,  Sans-Serif;
+	background: #fff;
+}
+
+.page-header{
+	/*background: blue;*/
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	font-family:'Gloria Hallelujah', Georgia;
+	width: 100%;
+}
+
+.page-main-header{
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	flex: 0 0 100%;
+}
+
+.header-title{
+	width: 100%;
+}
+
+.header-title h1{
+	font-size: 2.5em;
+	padding-top: 30px;
+    text-align: center;
+}
+
+.header-main-image{
+}
+
+.header-main-image img{
+	max-width: 60%;
+	/*padding: 3%;*/
+}
+
+.header-menubar{
+	width: 100%;
+	text-align: center;
+}
+
+.header-menubar ul{
+	margin-bottom: 0px;
+	margin-top: 10px;
+}
+
+
+.header-menubar li{
+	display: inline-block;
+	padding: 0px 20px;
+	text-decoration: none;
+	color: deepskyblue;
+}
+
+.header-menubar li a{
+	text-decoration: none;
+	color: deepskyblue;
+}
+
+.header-separator{
+	width: 100%;
+}
+
+.header-separator img{
+	position: relative;
+	margin-top: -5%;
+	z-index: -1;
+
+}
+
+.header-account-dropdown {
+	margin-top: 10px;
+}
+
+.page-main{
+	/*background: grey;*/
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	padding-top: 20px;
+}
+
+.page-left-side{
+	width: 20%;
+}
+
+.page-left-side h4{
+	color: deepskyblue;
+	margin-bottom: 0px;
+}
+
+.page-left-side div{
+	padding-left: 10%;
+}
+
+.page-center-side{
+	width: 80%;
+
+}
+
+.page-right-side{
+	width: 20%;
+}
+
+.article{
+	text-align: center;
+}
+
+.article-title h2{
+	margin-bottom: 0px;
+}
+
+.article-divider{
+	position: relative;
+	margin-top: -15px;
+	padding: 0 10%;
+	z-index: -1;
+}
+
+.article-comments-count h4{
+	margin-bottom: 0px;
+	font-size: 16px;
+}
+
+.article-categories h4{
+	margin-top: 0px;
+	font-size: 18px;
+}
+
+.article-short-content{
+	font: 14px 'Short Stack', Georgia; 
+	padding: 4% 7%;
+	text-indent: 10%;
+	text-align: justify;
+	text-justify: inter-word;
+}
+
+.article-read-more h3 {
+	font-size: 18px;
+}
+
+.article-search{
+	padding-top: 20%;
+}
+
+.article-search h4{
+}
+
+.article-follow{
+
+}
+
+.page-footer{
+	background: green;
+}

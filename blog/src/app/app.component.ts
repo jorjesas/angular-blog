@@ -4,6 +4,7 @@ import {Subject} from 'rxjs';
 
 import { isNullOrUndefined } from './_helpers/util';
 import { User } from './_models/user.model';
+import { PostService } from './_services/post.service';
 import { UserService } from './_services/user.service';
 import { AuthService } from './_services/auth.service';
 
@@ -20,7 +21,8 @@ export class AppComponent implements OnInit {
   isLoggedIn = false;
   private searchTerm = new Subject<string>();
 
-  constructor(private userService: UserService,
+  constructor(private postService: PostService,
+              private userService: UserService,
               private authService: AuthService,
               private router: Router) {
     this.user = this.authService.getCurrentUser();
@@ -47,13 +49,5 @@ export class AppComponent implements OnInit {
     this.authService.logout();
 
     this.router.navigate(['/home']);
-  }
-
-  onKeyup(searchText: string){
-
-    if(searchText !== ''){
-      this.searchTerm.next(searchText);
-    }
-    
   }
 }

@@ -1,0 +1,12 @@
+.post-edit-dropdown {
+    background-color: transparent;
+    color: deepskyblue;
+    border: 0px;
+    cursor: pointer;
+}
+
+.comment-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -20,6 +20,16 @@
       "type": "belongsTo",
       "model": "account",
       "foreignKey": ""
+    },
+    "category": {
+      "type": "belongsTo",
+      "model": "category",
+      "foreignKey": ""
+    },
+    "comments": {
+      "type": "hasMany",
+      "model": "comment",
+      "foreignKey": ""
     }
   },
   "acls": [

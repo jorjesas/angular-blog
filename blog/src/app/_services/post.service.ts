@@ -39,14 +39,32 @@ export class PostService {
         });
     }
 
-    getPost(id: string): Observable<Post> {
-        const url =  this.serverUrl + '/posts/' + id;
+    getLastPosts(postNumber: number): Observable<Post[]> {
+        let url = this.serverUrl + '/posts';
 
-                const header = new Headers();
-                header.append('Content-Type', 'application/json');
+        const header = new Headers();
+        header.append('Content-Type', 'application/json');
 
-                const options = new RequestOptions();
-                options.headers = header;
+        const options = new RequestOptions();
+        options.headers = header;
+
+        return this.http.get(url, options).map(res => res.json()).catch(err => {
+            return Observable.throw(err);
+        });
+    }
+
+    getPost(id: string, filter?: string): Observable<Post> {
+        let url =  this.serverUrl + '/posts/' + id;
+
+        if(filter){
+            url = this.serverUrl + "/posts/" + id + "?filter=" + filter;
+        }
+
+        const header = new Headers();
+        header.append('Content-Type', 'application/json');
+
+        const options = new RequestOptions();
+        options.headers = header;
 
         return this.http.get(url, options).map(res => res.json()).catch(err => {
             return Observable.throw(err);
@@ -82,13 +100,13 @@ export class PostService {
     updatePost(post: Post): Observable<any> {
         const url = this.serverUrl + '/posts/' + post.id;
 
-        const header = new Headers();
-        header.append('Accept', 'application/json');
+        // const header = new Headers();
+        // header.append('Accept', 'application/json');
 
-        const options = new RequestOptions();
-        options.headers = header;
+        // const options = new RequestOptions();
+        // options.headers = header;
 
-        return this.http.put(url, post, options).map(res => res.json()).catch(err => {
+        return this.http.put(url, post, {headers: this.headers}).map(res => res.json()).catch(err => {
             return Observable.throw(err);
         });
     }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Post } from '../../../_models/post.model';
+import { Category } from '../../../_models/category.model';
 import { PostService } from '../../../_services/post.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class PostFormComponent implements OnInit {
   message = {type: 'success', 'msg': 'Post successfully created.'};
   loading = false;
   defaultBodyValue = '';
+  categories: Category[] = [];
 
   constructor(
     private postService: PostService,
@@ -40,6 +42,12 @@ export class PostFormComponent implements OnInit {
         console.log(err);
       });
     }
+
+    this.postService.getCategories().subscribe(res => {      
+        this.categories = res;      
+        }, err => {    
+          console.log(err);      
+    });
   }
 
   onSubmit() {
