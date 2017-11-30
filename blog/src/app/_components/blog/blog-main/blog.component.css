@@ -2,6 +2,32 @@
     margin-bottom: 20px;
 }
 
+.page-main{
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+    padding-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.page-left-side{
+	width: 20%;
+}
+
+.page-left-side ul{
+    padding: 0px;
+}
+
+.page-left-side li {
+    list-style-type: none;
+}
+
+.page-left-side h4{
+	color: deepskyblue;
+	margin-bottom: 0px;
+}
+
 .blog-options {
     display: flex;
     align-items: center;
@@ -25,6 +51,35 @@
 .load-more.disabled {
     opacity: 0.5;
     cursor: not-allowed;
+}
+
+input[type="radio"] {
+    display:none;
+}
+
+input[type="radio"] + label {
+    color:deepskyblue;
+    font-family:Arial, sans-serif;
+    margin-bottom: 0px;
+}
+
+input[type="radio"] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-2px 10px 0 0;
+    vertical-align:middle;
+    background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) -38px top no-repeat;
+    cursor:pointer;
+}
+
+input[type="radio"]:checked + label span {
+    background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) -57px top no-repeat;
+}
+
+.rb-container {
+    text-align: left;
+    padding-left: 30%;
 }
 
 /*

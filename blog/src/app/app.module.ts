@@ -18,6 +18,7 @@ import { ProfileComponent } from './_components/user/profile/profile.component';
 import { RegisterComponent } from './_components/user/register/register.component';
 import { CategorySectionComponent } from './_components/blog/category-section/category-section.component';
 import { CommentFormComponent } from './_components/blog/comment-form/comment-form.component';
+import { PostAdminComponent } from './_components/blog/post-admin/post-admin.component';
 
 const appRoutes = [
   { path: '', component: HomeComponent},
@@ -43,7 +44,8 @@ const appRoutes = [
     ProfileComponent,
     RegisterComponent,
     CategorySectionComponent,
-    CommentFormComponent
+    CommentFormComponent,
+    PostAdminComponent
   ],
   imports: [
     BrowserModule,

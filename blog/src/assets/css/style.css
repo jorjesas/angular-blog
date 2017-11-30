@@ -1,8 +1,15 @@
+html {
+	height: 100%;
+}
+
 body{
 	display: flex;
 	flex-direction: column;
 	font-family:'Short Stack',Arial, Georgia,Trebuchet MS,  Sans-Serif;
 	background: #fff;
+	position: relative;
+	min-height: 100%;
+	padding-bottom: 5rem;
 }
 
 .page-header{
@@ -77,26 +84,7 @@ body{
 	margin-top: 10px;
 }
 
-.page-main{
-	/*background: grey;*/
-	display: flex;
-	flex-direction: row;
-	width: 100%;
-	padding-top: 20px;
-}
 
-.page-left-side{
-	width: 20%;
-}
-
-.page-left-side h4{
-	color: deepskyblue;
-	margin-bottom: 0px;
-}
-
-.page-left-side div{
-	padding-left: 10%;
-}
 
 .page-center-side{
 	width: 80%;
@@ -156,5 +144,12 @@ body{
 }
 
 .page-footer{
-	background: green;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	padding: 1rem;
+	background-color: #efefef;
+	text-align: center;
+	background-color: lightskyblue;
 }

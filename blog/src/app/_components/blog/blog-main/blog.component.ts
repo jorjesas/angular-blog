@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Subject} from 'rxjs';
+import { isNullOrUndefined } from 'util';
 
 import { Post } from '../../../_models/post.model';
 import { Category } from '../../../_models/category.model';
@@ -15,7 +16,9 @@ export class BlogComponent implements OnInit {
   posts: Post[] = [];
   lastPosts: Post[] = [];
   categories: Category[] = [];
+  selectedCategory: Category = null;
   private searchTerm = new Subject<string>();
+  private searchText = '';
   pager = {
     limit: 2,
     current: 0,
@@ -24,16 +27,11 @@ export class BlogComponent implements OnInit {
   };
   lastPostsCount = 5;
 
-  query = {
-    limit: this.pager.limit,
-    skip: this.pager.limit * this.pager.current
-  };
-
   constructor(private postService: PostService) {
     this.title = 'Blog';
 
     this.searchTerm.debounceTime(200).distinctUntilChanged().subscribe(searchTerm => {
-      this.postService.search(searchTerm).subscribe(response => {
+      this.postService.search(searchTerm, this.pager.limit, this.pager.limit * this.pager.current).subscribe(response => {
         this.posts = response as Post[];
       }, err => {
         console.log(err);
@@ -47,20 +45,33 @@ export class BlogComponent implements OnInit {
     this.getCategories();
   }
 
+  getPosts(mustRefresh: boolean) {
+    if (mustRefresh) {
+      this.pager.current = 0;
+      this.pager.reachedEnd = false;
+    }
+    
+    this.postService.search(this.searchText, this.pager.limit, this.pager.limit * this.pager.current).subscribe(response => {
+      this.posts = response as Post[];
+    }, err => {
+      console.log(err);
+    });
+  }
+
   getPostsPerPage() {
-    this.query.limit = this.pager.limit;
-    this.query.skip = this.pager.limit * this.pager.current;
 
-    const filter = encodeURI(JSON.stringify(this.query));
-
-    this.postService.getPosts(filter).subscribe(res => {
+    this.postService.search(this.searchText, 
+                            this.pager.limit, 
+                            this.pager.limit * this.pager.current,
+                            isNullOrUndefined(this.selectedCategory) ? "" : this.selectedCategory.id).subscribe(res => {
       //this.posts = res as Post[];
       console.log(res);
       this.pager.isLoading = false;
 
       if (res != null && res.length) {
         this.posts = this.posts.concat(res);
-       } else {
+        console.log(this.posts[0].comments);
+       } else { 
         this.pager.reachedEnd = true;
       }
 
@@ -71,7 +82,7 @@ export class BlogComponent implements OnInit {
 
   getLastPosts() {
     this.postService.getLastPosts(this.lastPostsCount).subscribe(res => {
-      this.lastPosts = res as Post[];
+      this.lastPosts = res.slice(0,5) as Post[];
     }, err => {
       console.log(err);
     });
@@ -85,6 +96,14 @@ export class BlogComponent implements OnInit {
     });
   }
 
+  getCategoryById(id) {
+    var cat =  this.categories.find(res => res.id===id);
+    if (!isNullOrUndefined(cat)) {
+      return cat.title;
+    }
+    return null;
+  }
+
   loadMore() {
     console.log('load more');
     this.pager.isLoading = true;
@@ -93,10 +112,22 @@ export class BlogComponent implements OnInit {
   }
 
   onKeyup(searchText: string){
-    
-        if(searchText !== ''){
-          this.searchTerm.next(searchText);
-        }       
+        this.searchText = searchText;
+        this.pager.current = 0;
+        this.pager.reachedEnd = false;
+        this.searchTerm.next(searchText);
+        // if(searchText !== ''){
+        //   this.searchTerm.next(searchText);
+        // }       
   }
+
+  onCategoryChanged(cat: Category) {
+    this.pager.current = 0;
+    this.pager.reachedEnd = false
+    this.selectedCategory = cat;
+    this.getPostsPerPage();
+
+  }
+
 
 }

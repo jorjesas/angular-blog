@@ -7,12 +7,13 @@ import { Comment } from '../_models/comment.model';
 import { Category } from '../_models/category.model';
 
 import { AuthService } from './auth.service';
-import { isNullOrEmpty } from '../_helpers/util';
+import { isNullOrEmpty, isNullOrUndefined } from '../_helpers/util';
 
 @Injectable()
 export class PostService {
 
     serverUrl = 'http://localhost:3000/api';
+    // serverUrl = 'https://ancient-refuge-97260.herokuapp.com/api';
 
     constructor(private http: Http,
                 private authService: AuthService) {}
@@ -111,6 +112,13 @@ export class PostService {
         });
     }
 
+    deletePost(post: Post): Observable<any> {
+        const url = this.serverUrl + '/posts/' + post.id;
+        return this.http.delete(url, {headers: this.headers}).map(res => res.json()).catch(err => {
+            return Observable.throw(err);
+        });
+    }
+
     addComment(comment: Comment): Observable<any> {
         const url = this.serverUrl + '/posts/' + comment.postId + '/comments';
 
@@ -139,15 +147,21 @@ export class PostService {
         return this.http.get(url, {headers: this.headers}).map(res => res.json() as Post[]).catch(err => Observable.throw(err));
     }
 
-    search(text: string): Observable<any> {
+    search(text: string, limitNumber?:number, skipNumber?:number, categoryId?: string): Observable<any> {
         const query = {
             where: {
                 or: [{title: {like: text, options: 'i'}}]
-            }
+            },
+            limit: limitNumber||0,
+            skip: skipNumber||0
         };
 
         const filter = encodeURI(JSON.stringify(query));
-        const url = this.serverUrl + '/posts?filter=' + filter;
+        let url = this.serverUrl + '/posts?filter=' + filter;
+        if (categoryId != "") {
+            console.log(categoryId);
+            url = this.serverUrl + '/categories/' + categoryId + '/posts?filter=' + filter;
+        }    
 
         return this.http.get(url, {headers: this.headers}).map(res => res.json()).catch(err => {
             return Observable.throw(err);

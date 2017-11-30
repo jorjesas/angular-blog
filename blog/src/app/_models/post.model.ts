@@ -17,6 +17,7 @@ export class Post {
             public id?: string,
             public title?: string,
             public body?: string,
+            public accountId?: string,
             public categoryId?: string,
             public comments?: Comment[]   
           ){}

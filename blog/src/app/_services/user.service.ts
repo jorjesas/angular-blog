@@ -14,6 +14,7 @@ export class UserService {
     });
 
     serverUrl = 'http://localhost:3000/api';
+    // serverUrl = 'https://ancient-refuge-97260.herokuapp.com/api';
 
     constructor(private http: Http,
         private authService: AuthService) {
