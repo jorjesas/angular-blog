@@ -1,10 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Post } from '../../../_models/post.model';
 import { PostService } from '../../../_services/post.service';
 import { AuthService } from '../../../_services/auth.service';
-import { post } from 'selenium-webdriver/http';
 
 @Component({
   selector: 'app-post-admin',
@@ -13,6 +12,7 @@ import { post } from 'selenium-webdriver/http';
 })
 export class PostAdminComponent implements OnInit {
   @Input() post: Post; 
+  @Output() notify: EventEmitter<Post> = new EventEmitter<Post>();
 
   constructor(private router: Router,
               protected postService: PostService,
@@ -37,6 +37,7 @@ export class PostAdminComponent implements OnInit {
     if (retVal) {
       this.postService.deletePost(this.post).subscribe(res => {
         this.router.navigate(['/blog']);
+        this.notify.emit(this.post);
       }, err => {
         console.log(err);
       });

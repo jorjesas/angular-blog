@@ -31,7 +31,7 @@ export class PostFormComponent implements OnInit {
         const id = params['id'];
         if (typeof params['id'] !== 'undefined' && params['id'] !== null) {
           this.loading = true;
-          return this.postService.getPost(id);
+          return this.postService.getPost(id, null);
         }
       }).subscribe(res => {
         this.loading = false;

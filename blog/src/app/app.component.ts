@@ -19,7 +19,6 @@ export class AppComponent implements OnInit {
 
   user: User = new User();
   isLoggedIn = false;
-  private searchTerm = new Subject<string>();
 
   constructor(private postService: PostService,
               private userService: UserService,
@@ -45,6 +44,7 @@ export class AppComponent implements OnInit {
 
   logout() {
     this.isLoggedIn = false;
+    this.user = null;
     this.userService.logout();
     this.authService.logout();
 

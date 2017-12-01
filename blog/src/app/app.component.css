@@ -9,6 +9,7 @@
     cursor: pointer;
 }
 
-.button-account-dropdown:focus {
-    /* border: 0px; */
+a:not([href]):not([tabindex]) {
+    color: deepskyblue;
+    cursor: pointer;
 }

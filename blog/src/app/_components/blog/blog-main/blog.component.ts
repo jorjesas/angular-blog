@@ -30,17 +30,13 @@ export class BlogComponent implements OnInit {
   constructor(private postService: PostService) {
     this.title = 'Blog';
 
-    this.searchTerm.debounceTime(200).distinctUntilChanged().subscribe(searchTerm => {
-      this.postService.search(searchTerm, this.pager.limit, this.pager.limit * this.pager.current).subscribe(response => {
-        this.posts = response as Post[];
-      }, err => {
-        console.log(err);
-      });
+    this.searchTerm.debounceTime(500).distinctUntilChanged().subscribe(searchTerm => {
+      this.getPosts(true);
     });
   }
 
   ngOnInit() {
-    this.getPostsPerPage();
+    this.getPosts(true);
     this.getLastPosts();
     this.getCategories();
   }
@@ -49,32 +45,20 @@ export class BlogComponent implements OnInit {
     if (mustRefresh) {
       this.pager.current = 0;
       this.pager.reachedEnd = false;
+      this.posts = [];
     }
     
-    this.postService.search(this.searchText, this.pager.limit, this.pager.limit * this.pager.current).subscribe(response => {
-      this.posts = response as Post[];
-    }, err => {
-      console.log(err);
-    });
-  }
-
-  getPostsPerPage() {
-
-    this.postService.search(this.searchText, 
+    this.postService.getPostsByFilterCriteria(this.searchText, 
                             this.pager.limit, 
                             this.pager.limit * this.pager.current,
                             isNullOrUndefined(this.selectedCategory) ? "" : this.selectedCategory.id).subscribe(res => {
-      //this.posts = res as Post[];
-      console.log(res);
       this.pager.isLoading = false;
-
       if (res != null && res.length) {
         this.posts = this.posts.concat(res);
         console.log(this.posts[0].comments);
        } else { 
         this.pager.reachedEnd = true;
       }
-
     }, err => {
       console.log(err);
     });
@@ -105,16 +89,13 @@ export class BlogComponent implements OnInit {
   }
 
   loadMore() {
-    console.log('load more');
     this.pager.isLoading = true;
     this.pager.current = this.pager.current + 1;
-    this.getPostsPerPage();
+    this.getPosts(false);
   }
 
   onKeyup(searchText: string){
         this.searchText = searchText;
-        this.pager.current = 0;
-        this.pager.reachedEnd = false;
         this.searchTerm.next(searchText);
         // if(searchText !== ''){
         //   this.searchTerm.next(searchText);
@@ -122,12 +103,12 @@ export class BlogComponent implements OnInit {
   }
 
   onCategoryChanged(cat: Category) {
-    this.pager.current = 0;
-    this.pager.reachedEnd = false
     this.selectedCategory = cat;
-    this.getPostsPerPage();
-
+    this.getPosts(true);
   }
 
+  onDeleteNotify(post: Post):void {
+    this.posts = this.posts.filter(p => p !== post);
+  }
 
 }

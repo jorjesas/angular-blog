@@ -6,7 +6,7 @@
     <aside class="page-left-side">
 
       <div class="">
-        <form class="form-inline my-2 my-lg-0 blog-search-form">
+        <form class="form-inline article-search-form">
             <input #searchTextBox (keyup)="onKeyup(searchTextBox.value)" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
         </form>
       </div>
@@ -22,7 +22,7 @@
         <fieldset class="category-list">
         </fieldset>
         <div class="rb-container">
-            <input id="rb-category-all" [value]='cat.id' type="radio" name="rb-categories" checked (click)="onCategoryChanged(cat)">
+            <input id="rb-category-all" [value]='0' type="radio" name="rb-categories" checked (click)="onCategoryChanged(null)">
             <label for="rb-category-all"><span></span>all</label>
         </div>
         <div class="rb-container" *ngFor="let cat of categories">
@@ -63,10 +63,10 @@
                   <img src="../../../assets/img/custom_divider_4.png" width="100%">
                 </div>
 
-                <app-post-admin [post]="post"></app-post-admin>
+                <app-post-admin [post]="post" (notify)="onDeleteNotify($event)"></app-post-admin>
         
                 <div class="article-comments-count">
-                  <h4>3 comments</h4>
+                  <h4>{{post.comments.length}} comments</h4>
                 </div>
         
                 <div class="article-categories">

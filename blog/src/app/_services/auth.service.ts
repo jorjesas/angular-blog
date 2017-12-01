@@ -13,7 +13,6 @@ export class AuthService {
   }
 
   setUser(user: User) {
-
     this.onAuthChange$.next(user);
 
     const userString = JSON.stringify(user);
@@ -24,28 +23,22 @@ export class AuthService {
 
     const userString = localStorage.getItem('currentUser');
     if (!isNullOrUndefined(userString)) {
-        console.log('getCurrentUser - ' + userString);
-      const user: User = JSON.parse(userString);
-
-      return user;
+      // console.log('getCurrentUser - ' + userString);
+      return JSON.parse(userString) as User;
     } else {
-
       return null;
     }
   }
 
   setToken(token: string) {
-
     localStorage.setItem('accessToken', token);
   }
 
   getToken(): string {
-
     return localStorage.getItem('accessToken');
   }
 
   logout() {
-
     this.onAuthChange$.next(null);
     // we need also request logout to the server api
 

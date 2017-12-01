@@ -18,7 +18,6 @@ export class UserService {
 
     constructor(private http: Http,
         private authService: AuthService) {
-
     }
 
     getUserById(id: string): Observable<User> {
@@ -47,17 +46,10 @@ export class UserService {
     logout(): Observable<any> {
 
         const url = this.serverUrl + '/accounts/logout';
-        const data = {accessTokenID: this.authService.getToken()};
-        return this.http.post(url, data, {headers: this.headers}).map(res => res.json()).catch(err => {
+        // const data = {accessTokenID: this.authService.getToken()};
+        return this.http.post(url, {headers: this.headers}).map(res => res.json()).catch(err => {
             return Observable.throw(err);
         });
-
-        // const url = this.serverUrl + '/accounts/logout';
-        // //const data = {accessTokenID: this.authService.getToken()};
-        // const data = null;
-        // return this.http.post(url, data, {headers: this.headers}).map(res => res.json()).catch(err => {
-        //     return Observable.throw(err);
-        // });
     }
 }
 

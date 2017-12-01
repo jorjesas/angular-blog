@@ -28,14 +28,62 @@
 	margin-bottom: 0px;
 }
 
-.blog-options {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.page-center-side{
+	width: 80%;
+
 }
 
-.blog-search-form {
+.page-right-side{
+	width: 20%;
+}
+
+.article{
+	text-align: center;
+}
+
+.article-title h2{
+	margin-bottom: 0px;
+}
+
+.article-divider{
+	position: relative;
+	margin-top: -15px;
+	padding: 0 10%;
+	z-index: -1;
+}
+
+.article-comments-count h4{
+	margin-bottom: 0px;
+	font-size: 16px;
+}
+
+.article-categories h4{
+	margin-top: 0px;
+	font-size: 18px;
+}
+
+.article-short-content{
+	font: 14px 'Short Stack', Georgia; 
+	padding: 4% 7%;
+	text-indent: 10%;
+	text-align: justify;
+	text-justify: inter-word;
+}
+
+.article-read-more h3 {
+	font-size: 18px;
+}
+
+.article-search{
+	padding-top: 20%;
+}
+
+.article-search-form {
     text-align: center;
+}
+
+.article-categories-side {
+    padding-bottom: 20px;
 }
 
 .load-more {

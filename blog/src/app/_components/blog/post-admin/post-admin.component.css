@@ -1,3 +1,7 @@
+a:not([href]):not([tabindex]) {
+	cursor: pointer;
+}
+
 .post-edit-dropdown {
     background-color: transparent;
     color: deepskyblue;

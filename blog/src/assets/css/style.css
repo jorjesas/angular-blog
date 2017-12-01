@@ -12,6 +12,14 @@ body{
 	padding-bottom: 5rem;
 }
 
+a:not[href] {
+	cursor: pointer;
+}
+
+button {
+	cursor: pointer;
+}
+
 .page-header{
 	/*background: blue;*/
 	display: flex;
@@ -38,14 +46,6 @@ body{
     text-align: center;
 }
 
-.header-main-image{
-}
-
-.header-main-image img{
-	max-width: 60%;
-	/*padding: 3%;*/
-}
-
 .header-menubar{
 	width: 100%;
 	text-align: center;
@@ -69,78 +69,9 @@ body{
 	color: deepskyblue;
 }
 
-.header-separator{
-	width: 100%;
-}
-
-.header-separator img{
-	position: relative;
-	margin-top: -5%;
-	z-index: -1;
-
-}
 
 .header-account-dropdown {
 	margin-top: 10px;
-}
-
-
-
-.page-center-side{
-	width: 80%;
-
-}
-
-.page-right-side{
-	width: 20%;
-}
-
-.article{
-	text-align: center;
-}
-
-.article-title h2{
-	margin-bottom: 0px;
-}
-
-.article-divider{
-	position: relative;
-	margin-top: -15px;
-	padding: 0 10%;
-	z-index: -1;
-}
-
-.article-comments-count h4{
-	margin-bottom: 0px;
-	font-size: 16px;
-}
-
-.article-categories h4{
-	margin-top: 0px;
-	font-size: 18px;
-}
-
-.article-short-content{
-	font: 14px 'Short Stack', Georgia; 
-	padding: 4% 7%;
-	text-indent: 10%;
-	text-align: justify;
-	text-justify: inter-word;
-}
-
-.article-read-more h3 {
-	font-size: 18px;
-}
-
-.article-search{
-	padding-top: 20%;
-}
-
-.article-search h4{
-}
-
-.article-follow{
-
 }
 
 .page-footer{

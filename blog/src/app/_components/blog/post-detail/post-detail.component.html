@@ -1,15 +1,7 @@
 <article class="post-detail">
   <h2>{{post.title}}</h2>
 
-  <div class="dropdown">
-      <button class="post-edit-dropdown dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Admin post
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" routerLink="/blog/{{post.id}}/edit">Edit post</a>
-        <a class="dropdown-item" (click)="onDelete()">Delete post</a>
-      </div>
-  </div>
+  <app-post-admin [post]="post"></app-post-admin>
   <hr>
 
   <div class="post-content">{{post.body}}</div>
@@ -21,11 +13,12 @@
   </div>
 
   <hr>
-  <div id="comments">
+  <div id="comments" class="comments-container">
       <h4>Comments:</h4>
       <ul>
         <li *ngFor="let comment of comments">
-          <h3>{{comment.name}} says: {{comment.title}}</h3>
+          <b>{{comment.name}} says: {{comment.title}}</b>
+          <hr>
           <div class="comment-body">{{comment.body}}</div>
         </li>
       </ul>
